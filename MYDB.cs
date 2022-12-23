@@ -54,5 +54,23 @@ namespace LibraryManagementSystem
 
             return table;
         }
+
+        public int setData(string query, MySqlParameter[] parameters)
+        {
+            MySqlCommand command = new MySqlCommand(query, getConnection());
+
+            if (parameters != null)
+            {
+                command.Parameters.AddRange(parameters);
+            }
+
+            openConnection();
+
+            int commandState = command.ExecuteNonQuery();
+
+            closeConnection();
+
+            return commandState;
+        }
     }
 }
